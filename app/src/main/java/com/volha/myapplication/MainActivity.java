@@ -12,7 +12,7 @@ import android.widget.EditText;
 public class MainActivity extends AppCompatActivity {
 
   private static final String ADDRESS_SHARED_PREFERENCES = "address_shared_preferences";
-  private static final String INTENT_KEY = "sharedpref";
+  public static final String INTENT_KEY = "sharedpref";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {

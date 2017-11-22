@@ -18,12 +18,14 @@
       android:id="@+id/button_one"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:text="@string/save"
       />
 
     <Button
       android:id="@+id/button_two"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:text="@string/go"
       />
 
 </LinearLayout>

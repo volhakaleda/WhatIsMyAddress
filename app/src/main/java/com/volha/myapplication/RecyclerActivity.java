@@ -1,11 +1,15 @@
 package com.volha.myapplication;
 
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
+import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class RecyclerActivity extends AppCompatActivity {
 
@@ -13,15 +17,25 @@ public class RecyclerActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_recycler);
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-    setSupportActionBar(toolbar);
 
-    FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-    fab.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-      }
-    });
+    RecyclerView recyclerView = findViewById(R.id.recycler_view);
+
+    String sharedPrefs = getIntent().getStringExtra(MainActivity.INTENT_KEY);
+
+    SharedPreferences sharedPreferences = getSharedPreferences(sharedPrefs, MODE_PRIVATE);
+    Map<String, ?> allSharedValues = sharedPreferences.getAll();
+
+    List<String> emails = new ArrayList<>();
+
+    for(String key : allSharedValues.keySet()) {
+      String eachEmail = (String) allSharedValues.get(key);
+      emails.add(eachEmail);
+    }
+
+    recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    EmailAdapter emailAdapter= new EmailAdapter(emails);
+    recyclerView.setAdapter(emailAdapter);
+
+
   }
 }
